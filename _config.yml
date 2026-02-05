@@ -1,0 +1,9 @@
+# GitHub Pages Jekyll 配置
+# 此文件可以為空或包含基本配置
+
+title: Benchmark Visualizer
+description: Benchmark Autotest Frontend - 重定向服務
+theme: jekyll-theme-minimal
+
+# 自定義域名（可選，已通過 CNAME 文件配置）
+# domain: benchmarkvisualizer.tsai1247.com
