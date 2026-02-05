@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benchmark Visualizer - Redirecting...</title>
+    <title>Benchmark Visualizer</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -20,14 +20,56 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
         }
         h1 {
             color: #333;
-            margin: 0;
+            margin: 0 0 10px 0;
         }
-        p {
+        .path-info {
+            color: #999;
+            font-size: 14px;
+            margin: 0 0 20px 0;
+            font-family: monospace;
+        }
+        .error-message {
             color: #666;
-            margin: 10px 0 0 0;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+        .btn-version {
+            background: #667eea;
+            color: white;
+        }
+        .btn-version:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .btn-home {
+            background: #f0f0f0;
+            color: #333;
+        }
+        .btn-home:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
         }
         .spinner {
             border: 4px solid #f3f3f3;
@@ -38,17 +80,50 @@
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
+        .spinner.hidden {
+            display: none;
+        }
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        .error-container {
+            display: none;
+        }
+        .error-container.show {
+            display: block;
+        }
+        .redirect-container {
+            display: block;
+        }
+        .redirect-container.hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Benchmark Visualizer</h1>
-        <div class="spinner"></div>
-        <p>正在重定向中...</p>
+        
+        <!-- 重定向中的狀態 -->
+        <div class="redirect-container" id="redirectContainer">
+            <div class="spinner"></div>
+            <p>正在重定向中...</p>
+        </div>
+
+        <!-- 錯誤狀態 -->
+        <div class="error-container" id="errorContainer">
+            <p class="path-info" id="pathInfo"></p>
+            <p class="error-message">❌ 此版本不存在</p>
+            <p style="color: #666; margin: 20px 0;">請選擇以下可用版本：</p>
+            
+            <div class="buttons-container">
+                <a href="/v1" class="btn btn-version">版本 v1</a>
+                <a href="/v2" class="btn btn-version">版本 v2</a>
+                <a href="/v3" class="btn btn-version">版本 v3</a>
+                <a href="/" class="btn btn-home">返回首頁</a>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -69,11 +144,16 @@
         path = path.replace(/^\/|\/$/g, '');
 
         // 查找重定向目標
-        const redirectUrl = redirects[path] !== undefined ? redirects[path] : redirects[''];
+        const redirectUrl = redirects[path];
 
-        // 執行重定向
-        if (redirectUrl) {
+        if (redirectUrl !== undefined) {
+            // 路徑有效，執行重定向
             window.location.replace(redirectUrl);
+        } else {
+            // 路徑無效，顯示錯誤頁面
+            document.getElementById('redirectContainer').classList.add('hidden');
+            document.getElementById('errorContainer').classList.add('show');
+            document.getElementById('pathInfo').textContent = '路徑：/' + (path || '');
         }
     </script>
 </body>
