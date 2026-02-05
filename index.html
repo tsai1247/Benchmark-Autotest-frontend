@@ -53,12 +53,16 @@
 
     <script>
         // 重定向映射表
+        const v1 = 'https://script.google.com/macros/s/AKfycbyOpKPAsSwFg4IrZ8itqSmg-L-e8aPkm08RWlPICH-DyQDA25JxoaTsDMP-3D3aTcWY/exec';
+        const v2 = 'https://script.google.com/macros/s/AKfycbz7-2Tvms-9sdT3wHSrSlZ8qxvMK1HaWctsVIk1VQpdsZQWWaks3P48CIArYveY0RdX/exec';
+        const v3 = 'https://script.google.com/macros/s/AKfycbzIUynyZ7PdBPOidhGdvBws7Xwjs6LknAi2h11AJHnTFF6iv1mf2HDX9kWVPqbZM4G2/exec';
+
         const redirects = {
-            '': 'https://script.google.com/macros/s/AKfycbyjykO8Xpx9MkIeK_IgnuNbw9YznCTm0ycJHJbNmIbncp5h_PSz8gpmHWgPmrWK7wxk/exec',
-            '/': 'https://script.google.com/macros/s/AKfycbyjykO8Xpx9MkIeK_IgnuNbw9YznCTm0ycJHJbNmIbncp5h_PSz8gpmHWgPmrWK7wxk/exec',
-            'v1': 'https://script.google.com/macros/s/AKfycbyOpKPAsSwFg4IrZ8itqSmg-L-e8aPkm08RWlPICH-DyQDA25JxoaTsDMP-3D3aTcWY/exec',
-            'v2': 'https://script.google.com/macros/s/AKfycbz7-2Tvms-9sdT3wHSrSlZ8qxvMK1HaWctsVIk1VQpdsZQWWaks3P48CIArYveY0RdX/exec',
-            'v3': 'https://script.google.com/macros/s/AKfycbyjykO8Xpx9MkIeK_IgnuNbw9YznCTm0ycJHJbNmIbncp5h_PSz8gpmHWgPmrWK7wxk/exec'
+            '': v3,
+            '/': v3,
+            'v1': v1,
+            'v2': v2,
+            'v3': v3
         };
 
         // 取得當前路徑
